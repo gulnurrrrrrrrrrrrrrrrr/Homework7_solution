@@ -16,7 +16,21 @@ public class ControlTower implements TowerMediator {
             System.out.println(a.getId() + " is allowed to land.");
             runwayQueue.add(a);
             return true;
+        } else if (a instanceof CargoPlane) {
+            System.out.println(a.getId() + " is waiting for clearance to land.");
+            takeoffQueue.add(a);  // Добавляем в очередь на взлет
+            return false;
+        } else if (a instanceof Helicopter) {
+            System.out.println(a.getId() + " is waiting for clearance to land.");
+            takeoffQueue.add(a);  // Добавляем в очередь на взлет
+            return false;
         }
         return false;
+    }
+
+    public void emergencyLanding(Aircraft a) {
+        System.out.println(a.getId() + " emergency landing! Clearing runway for immediate landing.");
+        runwayQueue.add(a);
+        broadcast("EMERGENCY LANDING! " + a.getId() + " needs immediate landing.", a);
     }
 }

@@ -11,5 +11,15 @@ public class Simulator {
         p1.send("Requesting runway", tower);
         c1.send("Requesting runway", tower);
         h1.send("Requesting runway", tower);
+
+        Random rand = new Random();
+        if (rand.nextBoolean()) {
+            System.out.println("Triggering emergency: MAYDAY from " + p1.getId());
+            p1.send("MAYDAY", tower);
+            tower.emergencyLanding(p1);
+        }
+
+        c1.send("MAYDAY", tower);
+        tower.emergencyLanding(c1);
     }
 }
